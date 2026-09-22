@@ -14,10 +14,14 @@
         <nav class="site-nav">
             <ul>
                 <li><a href="#about">Giới thiệu</a></li>
+                <li><a href="#skills">Kỹ năng</a></li>
                 <li><a href="#projects">Dự án</a></li>
                 <li><a href="#contact">Liên hệ</a></li>
             </ul>
         </nav>
+        <button class="theme-toggle" id="theme-toggle" type="button" aria-pressed="false">
+            Chế độ tối
+        </button>
     </header>
     <main class="container">
         <section id="about" class="hero">
@@ -28,24 +32,36 @@
             </div>
             <img src="css/IMG_8045.jpeg" alt="Ảnh chân dung Nhật Đăng">
         </section>
+        <section id="skills">
+            <h2>Kỹ năng</h2>
+            <div>
+                <ul class="tags">
+                <li>Python</li>
+                <li>C++</li>
+                <li>HTML &amp; CSS</li>
+                <li>JavaScript</li>
+                <li>Git</li>
+                <li>Xử lý hình ảnh</li>
+            </ul>
+            </div>
+        </section>
         <section id="projects">
                 <h2>Dự án</h2>
                 <div class="projects">
                     <article class="card">
-                        <h3>Mô phỏng con lắc</h3>
-                        <p>Python + Matplotlib, 2025.</p>
-                    </article>
-                    <article class="card">
-                        <h3>Đo nhiệt độ bằng Arduino</h3>
-                        <p>C++ và cảm biến DS18B20</p>
+                        <h3>Mô hình Tool-Calling cho dữ liệu hành chính Việt Nam</h3>
+                        <p>Fine-tune mô hình nhỏ để chọn và nối chuỗi công cụ bản đồ từ câu lệnh tự nhiên. Đạt 100% chọn đúng công cụ trên nhóm 8 công cụ, tốn khoảng một nửa số token so với mô hình gốc.</p>
+                        <p>Python + LoRA + Qwen2.5</p>
                     </article>
                     <article class="card">
                        <h3>Chatbot - SunGPT</h3>
-                        <p>python + WEB</p>
+                        <p>Trợ lý hướng dẫn học lập trình, giúp người mới giải thích code, gỡ lỗi và hiểu khái niệm qua hội thoại. Xây dựng trên Gemini API. </p>
+                        <p>Python + Gemini + API Web</p>
                     </article>
                     <article class="card">
-                        <h3>Chatbot - LiveMapVN</h3>
-                        <p>python + web</p>
+                        <h3>Game Rắn săn mồi</h3>
+                        <p>Tái hiện trò chơi rắn săn mồi cổ điển: điều khiển rắn ăn mồi để dài ra, thua khi đâm vào tường hoặc vào thân mình. Tự viết vòng lặp game, xử lý phím bấm và va chạm.</p>
+                        <p>C++</p>
                     </article>
                 </div>
         </section>
@@ -70,7 +86,32 @@
     </main>
     <footer>
         <p>© 2026 Nguyễn Nhật Đăng</p>
+        <nav aria-label="Liên kết mạng xã hội">
+            <ul class="social-links">
+                <li><a href="https://www.linkedin.com/in/%C4%91%C4%83ng-nguy%E1%BB%85n-6239a1160/" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+                <li><a href="https://github.com/FireHaru" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
+            </ul>
+        </nav>
     </footer>
+    <script>
+        const themeToggle = document.querySelector('#theme-toggle');
+        const savedTheme = localStorage.getItem('theme');
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        const initialTheme = savedTheme || (prefersDark ? 'dark' : 'light');
+
+        document.documentElement.dataset.theme = initialTheme;
+        themeToggle.setAttribute('aria-pressed', initialTheme === 'dark');
+        themeToggle.textContent = initialTheme === 'dark' ? 'Chế độ sáng' : 'Chế độ tối';
+
+        themeToggle.addEventListener('click', () => {
+            const nextTheme = document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark';
+
+            document.documentElement.dataset.theme = nextTheme;
+            localStorage.setItem('theme', nextTheme);
+            themeToggle.setAttribute('aria-pressed', nextTheme === 'dark');
+            themeToggle.textContent = nextTheme === 'dark' ? 'Chế độ sáng' : 'Chế độ tối';
+        });
+    </script>
 </body>
 
 </html>

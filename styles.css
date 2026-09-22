@@ -51,6 +51,24 @@ a{
     text-decoration: none;;
 }
 
+.theme-toggle{
+    position: fixed;
+    top: 1rem;
+    right: 1rem;
+    z-index: 1;
+    padding: 0.5rem 0.75rem;
+    border: 1px solid var(--color-accent);
+    border-radius: 0.5rem;
+    color: var(--color-accent);
+    background: var(--color-bg);
+    cursor: pointer;
+}
+
+.theme-toggle:hover{
+    color: #ffffff;
+    background: var(--color-accent);
+}
+
 .logo{
     font-weight: 700;;
 }
@@ -75,11 +93,38 @@ a{
 
 .hero img{
     border-radius: 6px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .hero img:hover{
-    
+    transform: translateY(-4px) scale(1.02);
+    box-shadow: 0 8px 18px rgb(15 118 110 / 25%);
 }
+
+.tags{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.tags li{
+    padding: 0.5rem 0.9rem;
+    border: 1px solid var(--color-accent);
+    border-radius: 999px;
+    color: var(--color-accent);
+    white-space: nowrap;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+}
+
+.tags li:hover{
+    transform: translateY(-3px);
+    background-color: #f0fdfa;
+    box-shadow: 0 4px 10px rgb(15 118 110 / 25%);
+}
+
 .projects{
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr)) ;
@@ -125,6 +170,24 @@ input, textarea{
     cursor: pointer;
 }
 
+footer{
+    padding: 2rem var(--space);
+    text-align: center;
+}
+
+footer p{
+    margin: 0 0 0.75rem;
+}
+
+.social-links{
+    display: flex;
+    justify-content: center;
+    gap: 1.25rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
 :focus-visible{
     outline: 3px solid var(--color-accent);
     outline-offset: 3px;
@@ -134,5 +197,22 @@ input, textarea{
     .hero{
         grid-template-columns: 2fr 1fr;
     }
+}
+
+@media (prefers-color-scheme: dark) {
+    :root:not([data-theme]){
+        --color-bg: #0f172a;
+        --color-text: #e2e8f0;
+    }
+}
+
+:root[data-theme="light"]{
+    --color-bg: #ffffff;
+    --color-text: #1e293b;
+}
+
+:root[data-theme="dark"]{
+    --color-bg: #0f172a;
+    --color-text: #e2e8f0;
 }
 
