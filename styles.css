@@ -18,15 +18,19 @@ body{
     background: var(--color-bg);
 }
 
-img{ max-width: 50%; height: auto;}
+img{ height: auto;}
 
 .site-header{
+    position: sticky;
+    top: 0;
+    z-index: 10;
     display: flex;
     flex-wrap: wrap;
     align-items: center;
     justify-content: space-between;
     gap: var(--space);
     padding: var(--space);
+    background: var(--color-bg);
 }
 
 .site-nav ul{
@@ -37,10 +41,38 @@ img{ max-width: 50%; height: auto;}
     padding: 0;
     list-style: none;
 }
+
+.site-nav{
+    margin-left: auto;
+}
     
 .site-nav a{
+    position: relative;
     display: inline-block;
     padding-block: 0.5rem;
+    transition: color 0.2s ease, transform 0.2s ease;
+}
+
+.site-nav a:hover{
+    transform: translateY(-4px) scale(1.02);
+}
+
+.site-nav a::after{
+    position: absolute;
+    right: 0;
+    bottom: 0.15rem;
+    left: 0;
+    height: 2px;
+    background: var(--color-accent);
+    content: "";
+    transform: scaleX(0);
+    transform-origin: center;
+    transition: transform 0.2s ease;
+}
+
+.site-nav a:hover::after,
+.site-nav a:focus-visible::after{
+    transform: scaleX(1);
 }
 
 a{
@@ -48,25 +80,66 @@ a{
 }
 
 .site-header a{
-    text-decoration: none;;
+    text-decoration: none;
+    transition: color 0.2s ease, transform 0.2s ease;
 }
 
-.theme-toggle{
-    position: fixed;
-    top: 1rem;
-    right: 1rem;
-    z-index: 1;
-    padding: 0.5rem 0.75rem;
-    border: 1px solid var(--color-accent);
-    border-radius: 0.5rem;
+.site-header a:hover{
     color: var(--color-accent);
-    background: var(--color-bg);
+    transform: translateY(-2px);
+}
+
+
+.theme-toggle{
+    position: relative;
+    flex: 0 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 4.25rem;
+    height: 2.25rem;
+    padding: 0.25rem;
+    border: 0;
+    border-radius: 999px;
+    color: #64748b;
+    background: #cbd5e1;
     cursor: pointer;
+    transition: background-color 0.2s ease;
 }
 
 .theme-toggle:hover{
-    color: #ffffff;
-    background: var(--color-accent);
+    background: #94a3b8;
+}
+
+.theme-toggle[aria-pressed="true"]{
+    color: #f8fafc;
+    background: #1e293b;
+}
+
+.theme-icon{
+    position: relative;
+    z-index: 1;
+    display: grid;
+    width: 1.5rem;
+    height: 1.5rem;
+    place-items: center;
+    font-size: 1rem;
+    line-height: 1;
+}
+
+.theme-toggle-knob{
+    position: absolute;
+    top: 0.25rem;
+    left: 0.25rem;
+    width: 1.75rem;
+    height: 1.75rem;
+    border-radius: 50%;
+    background: #ffffff;
+    transition: transform 0.2s ease;
+}
+
+.theme-toggle[aria-pressed="true"] .theme-toggle-knob{
+    transform: translateX(2rem);
 }
 
 .logo{
@@ -92,6 +165,7 @@ a{
 }
 
 .hero img{
+    max-width: 50%;
     border-radius: 6px;
     transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
@@ -197,8 +271,10 @@ footer p{
     .hero{
         grid-template-columns: 2fr 1fr;
     }
+    .hero img{
+        max-width: 100%;
+    }
 }
-
 @media (prefers-color-scheme: dark) {
     :root:not([data-theme]){
         --color-bg: #0f172a;

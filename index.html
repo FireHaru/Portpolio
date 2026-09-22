@@ -19,8 +19,10 @@
                 <li><a href="#contact">Liên hệ</a></li>
             </ul>
         </nav>
-        <button class="theme-toggle" id="theme-toggle" type="button" aria-pressed="false">
-            Chế độ tối
+        <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Bật chế độ tối" aria-pressed="false">
+            <span class="theme-icon theme-icon-sun" aria-hidden="true">☀</span>
+            <span class="theme-icon theme-icon-moon" aria-hidden="true">☾</span>
+            <span class="theme-toggle-knob" aria-hidden="true"></span>
         </button>
     </header>
     <main class="container">
@@ -36,13 +38,13 @@
             <h2>Kỹ năng</h2>
             <div>
                 <ul class="tags">
-                <li>Python</li>
-                <li>C++</li>
-                <li>HTML &amp; CSS</li>
-                <li>JavaScript</li>
-                <li>Git</li>
-                <li>Xử lý hình ảnh</li>
-            </ul>
+                    <li>Python</li>
+                    <li>C++</li>
+                    <li>HTML &amp; CSS</li>
+                    <li>JavaScript</li>
+                    <li>Git</li>
+                    <li>Xử lý hình ảnh</li>
+                </ul>
             </div>
         </section>
         <section id="projects">
@@ -101,7 +103,7 @@
 
         document.documentElement.dataset.theme = initialTheme;
         themeToggle.setAttribute('aria-pressed', initialTheme === 'dark');
-        themeToggle.textContent = initialTheme === 'dark' ? 'Chế độ sáng' : 'Chế độ tối';
+        themeToggle.setAttribute('aria-label', initialTheme === 'dark' ? 'Bật chế độ sáng' : 'Bật chế độ tối');
 
         themeToggle.addEventListener('click', () => {
             const nextTheme = document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark';
@@ -109,7 +111,7 @@
             document.documentElement.dataset.theme = nextTheme;
             localStorage.setItem('theme', nextTheme);
             themeToggle.setAttribute('aria-pressed', nextTheme === 'dark');
-            themeToggle.textContent = nextTheme === 'dark' ? 'Chế độ sáng' : 'Chế độ tối';
+            themeToggle.setAttribute('aria-label', nextTheme === 'dark' ? 'Bật chế độ sáng' : 'Bật chế độ tối');
         });
     </script>
 </body>
