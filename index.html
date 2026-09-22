@@ -9,7 +9,7 @@
 </head>
 
 <body>
-    <header class="site-header">
+    <header class="site-header container">
         <a class="logo" href="#">Nhật Đăng</a>
         <nav class="site-nav">
             <ul>
@@ -19,42 +19,52 @@
             </ul>
         </nav>
     </header>
-    <main>
-        <section id="about">
-            <h1>Nguyễn Nhật Đăng</h1>
-            <p>Sinh viên vật lý, thích làm WEB.</p>
+    <main class="container">
+        <section id="about" class="hero">
+            <div>
+                <h1>Xin chào, mình là Nguyễn Nhật Đăng</h1>
+                <p>Sinh viên Vật lý tin học thích số liệu và xử lý hình ảnh</p>
+                <a class="button" href="#contact">Liên hệ</a>
+            </div>
             <img src="css/IMG_8045.jpeg" alt="Ảnh chân dung Nhật Đăng">
         </section>
-        <section id="project">
+        <section id="projects">
                 <h2>Dự án</h2>
-                <article>
-                    <h3>Mô phỏng con lắc</h3>
-                    <p>Python + Matplotlib, 2025.</p>
-                </article>
-                <article>
-                    <h3>Đo nhiệt độ bằng Arduino</h3>
-                    <p>C++ và cảm biến DS18B20</p>
-                </article>
-                <article>
-                    <h3>Chatbot - SunGPT</h3>
-                    <p>python + WEB</p>
-                </article>
-                <article>
-                    <h3>Chatbot - LiveMapVN</h3>
-                    <p>python + web</p>
-                </article>
+                <div class="projects">
+                    <article class="card">
+                        <h3>Mô phỏng con lắc</h3>
+                        <p>Python + Matplotlib, 2025.</p>
+                    </article>
+                    <article class="card">
+                        <h3>Đo nhiệt độ bằng Arduino</h3>
+                        <p>C++ và cảm biến DS18B20</p>
+                    </article>
+                    <article class="card">
+                       <h3>Chatbot - SunGPT</h3>
+                        <p>python + WEB</p>
+                    </article>
+                    <article class="card">
+                        <h3>Chatbot - LiveMapVN</h3>
+                        <p>python + web</p>
+                    </article>
+                </div>
         </section>
         <section id="contact">
             <h2>Liên hệ</h2>
             <form>
-                <label for="name">Họ và tên</label>
-                <input id="name" name="name" required>
-                <label for="email">Email</label>
-                <input id="email" type ="email" 
-                        name="email" required>
-                <label for="msg">Lời nhắn</label>
-                <textarea id="msg" name="msg"></textarea>
-                <button>Gửi</button>
+                <div class="field">
+                    <label for="name">Họ và tên</label>
+                    <input id="name" name="" name="name" required>
+                </div>
+                <div class="field">
+                    <label for="email">Email</label>
+                    <input id="email" type="email" name="email" required>
+                </div>
+                <div class="field">
+                    <label for="msg">Lời nhắn</label>
+                    <textarea id="msg" name="msg"></textarea>
+                </div>
+                <button class="button">Gửi</button>
             </form>
         </section>
     </main>
