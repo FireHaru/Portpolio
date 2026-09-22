@@ -164,9 +164,15 @@ a{
     line-height: 1.2;
 }
 
+h2{
+    font-size: clamp(1.5rem, 3vw, 2.25rem);
+}
+
 .hero img{
     max-width: 50%;
+    aspect-ratio: 1;
     border-radius: 6px;
+    object-fit: cover;
     transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
@@ -210,6 +216,12 @@ a{
     border: 1px solid #cbd5e1;
     border-radius: 0.75rem;
     background: var(--color-bg);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card:hover{
+    transform: translateY(-4px);
+    box-shadow: 0 8px 18px rgb(15 118 110 / 20%);
 }
 
 .card h3{
@@ -275,6 +287,15 @@ footer p{
         max-width: 100%;
     }
 }
+
+@media (prefers-reduced-motion: reduce){
+    .card,
+    .card:hover{
+        transform: none;
+        transition: none;
+    }
+}
+
 @media (prefers-color-scheme: dark) {
     :root:not([data-theme]){
         --color-bg: #0f172a;
