@@ -1,191 +1,254 @@
-# Báo cáo nâng cấp portfolio Nguyễn Nhật Đăng
+# Báo cáo chức năng và cải tiến portfolio Nguyễn Nhật Đăng
 
-Ngày thực hiện: 06/10/2026.
+**Ngày cập nhật:** 06/10/2026
 
-## 1. Tổng quan
+**Phiên bản code tham chiếu:** `a0c8022` trên nhánh `main`
 
-Dự án sử dụng HTML, CSS và JavaScript thuần. Giữ lại ảnh chân dung, tên chủ sở hữu và sáu dự án có sẵn. Không thêm thư viện hoặc bước build.
+**Repository:** https://github.com/FireHaru/Portpolio
 
-Giao diện mới dùng nền trắng ngà/xanh đậm, typography lớn, điểm nhấn xanh lá, khung ảnh chân dung và thẻ dự án có hình minh họa bằng CSS. Bố cục được thiết kế cho desktop, tablet và điện thoại.
+Báo cáo này mô tả trạng thái hiện tại và các thay đổi so với bản dự án được đọc ở đầu quá trình chỉnh sửa. Thay thế báo cáo lịch sử trước đây để tránh nhầm giữa tính năng hiện có và các thử nghiệm đã bỏ.
 
-## 2. Chức năng thêm mới và cải tiến
+## 1. So sánh tổng quan với bản ban đầu
 
-| Chức năng | Cách sử dụng / hành vi |
+Bản ban đầu là website HTML/CSS/JavaScript thuần, có giới thiệu cá nhân, danh sách kỹ năng, sáu dự án, tìm kiếm theo tên, lọc công nghệ và đổi giao diện sáng/tối. Form liên hệ chỉ có trường nhập, chưa kết nối gửi lời nhắn.
+
+| Hạng mục | Bản ban đầu | Phiên bản hiện tại |
+| --- | --- | --- |
+| Giao diện | Bố cục cơ bản, danh sách kỹ năng dạng tag | Bố cục phân khu rõ, hero lớn, ảnh chân dung, thẻ nội dung, màu sáng/tối đồng bộ |
+| Kỹ năng | Danh sách công nghệ | Ba nhóm: lập trình, AI & dữ liệu, phát triển web; một hàng cuộn ngang |
+| Dự án | Tên và tag | Thẻ có chủ đề, mô tả, ký hiệu, công nghệ và hộp thoại chi tiết |
+| Tìm kiếm | Theo tên | Theo tên, mô tả, chủ đề, công nghệ; hỗ trợ không dấu |
+| Sắp xếp | Chưa có | Mặc định hoặc tên A–Z |
+| Kết quả tìm kiếm | Danh sách đơn giản | Bộ đếm, thông báo không có kết quả, nút xóa bộ lọc |
+| Hoạt động và kỹ năng mềm | Chưa có | Công tác Hội, bốn nhóm kỹ năng mềm và các thẻ hoạt động |
+| Thành tích | Chưa có | Ba thành tích cùng khung ảnh giấy khen/chứng nhận |
+| Ảnh hoạt động | Chưa có | Cấu hình nhiều ảnh, slideshow trượt, mũi tên, chấm chọn, kéo/vuốt |
+| Liên hệ | Chưa có nơi nhận | Gửi AJAX qua FormSubmit đến email, giữ nguyên trang và reset khi thành công |
+| Điều hướng | Liên kết khu vực | Thêm hoạt động/thành tích, menu di động, đánh dấu khu vực, về đầu trang |
+| Cấu trúc code | Các file cơ bản | Module slider/gallery, class dùng chung, dữ liệu ảnh riêng và hướng dẫn bảo trì |
+
+## 2. Giao diện và điều hướng
+
+- Thiết kế lại theo phong cách tối giản với nền trắng ngà, điểm nhấn xanh và phiên bản tối tương ứng.
+- Hero có tiêu đề lớn, giới thiệu, ảnh chân dung và các liên kết đến dự án/liên hệ.
+- Các khu vực có nhãn, tiêu đề và khoảng cách nhất quán.
+- Giữ chức năng sáng/tối có sẵn; đồng bộ màu cho thành phần mới, lưu lựa chọn và theo giao diện hệ thống khi chưa có lựa chọn.
+- Header cố định khi cuộn; thêm liên kết Hoạt động và Thành tích.
+- Menu di động mở/đóng bằng nút, đóng khi chọn mục hoặc nhấn Escape.
+- Đánh dấu mục điều hướng theo khu vực đang xuất hiện bằng IntersectionObserver.
+- Nút về đầu trang hiện khi cuộn hơn 500px.
+- Năm bản quyền cập nhật theo năm của trình duyệt.
+- Căn đều hai bên đoạn giới thiệu kinh nghiệm Liên chi Hội trưởng.
+
+## 3. Kỹ năng và thanh trượt danh sách
+
+### 3.1. Nội dung kỹ năng
+
+Ba nhóm kỹ năng chuyên môn:
+
+1. **Lập trình:** Python, C/C++, Git.
+2. **AI & dữ liệu:** Machine Learning, NLP, xử lý hình ảnh số.
+3. **Phát triển web:** HTML & CSS, JavaScript, API.
+
+### 3.2. Thanh trượt dùng chung
+
+Kỹ năng, dự án, hoạt động và thành tích dùng `.card-slider`:
+
+- Cuộn ngang; thêm thẻ mới không làm danh sách kéo dài bằng cách xuống hàng ngoài cấu hình.
+- Nút trái/phải cuộn theo chiều rộng một thẻ cộng khoảng cách.
+- Hỗ trợ cuộn/vuốt ngang tự nhiên và phím trái/phải khi focus vào danh sách.
+- Scroll snap giúp dừng theo vị trí thẻ.
+- Nút vô hiệu hóa khi tới đầu hoặc cuối danh sách.
+- Theo dõi resize và thay đổi danh sách để cập nhật trạng thái điều khiển.
+- Nhóm nút dự án được ẩn khi không có nội dung tràn ngang.
+
+| Danh sách | Desktop | Tablet | Điện thoại |
+| --- | --- | --- | --- |
+| Kỹ năng | 3 cột, 1 hàng | 2 cột | Một thẻ rộng 88%, hé phần tiếp theo |
+| Dự án | 3 cột × 2 hàng, tối đa 6 thẻ trong vùng nhìn | 2 cột × 2 hàng | 1 cột × 2 hàng |
+| Hoạt động | 2 cột, 1 hàng | 2 cột | Một thẻ rộng 88% |
+| Thành tích | 3 cột, 1 hàng | 2 cột | Một thẻ rộng 88% |
+
+Giới hạn sáu dự án là cách bố trí vùng nhìn trên desktop, không phải cắt bỏ dữ liệu. Dự án thêm vẫn được render và xem bằng cuộn ngang.
+
+## 4. Chức năng dự án
+
+- Giữ sáu dự án ban đầu, bổ sung mô tả tóm tắt, chủ đề và ký hiệu minh họa.
+- Thẻ hiển thị tên, nhóm chủ đề, mô tả và công nghệ riêng thành các tag.
+- Tìm kiếm trên tên, mô tả, chủ đề và công nghệ; chuẩn hóa tiếng Việt không dấu và chữ hoa/thường.
+- Kết hợp tìm kiếm với bộ lọc công nghệ.
+- Sắp xếp mặc định hoặc theo tên A–Z tiếng Việt.
+- Hiển thị số dự án phù hợp trên tổng số dự án.
+- Khi không có kết quả: thông báo, gợi ý tìm khác và nút đặt lại tìm kiếm/lọc/sắp xếp.
+- Phím `/` đưa con trỏ vào ô tìm kiếm khi không nhập liệu hoặc mở dialog.
+- Thay đổi danh sách đưa vị trí cuộn về đầu.
+- Nút “Khám phá dự án” mở dialog có tên, mô tả, công nghệ và liên kết hồ sơ GitHub.
+- Đóng dialog bằng nút ×, Escape hoặc bấm ngoài khung.
+- Ô sắp xếp dùng `.select-control` với mũi tên CSS căn giữa, không phụ thuộc vị trí biểu tượng mặc định của trình duyệt.
+
+**Giới hạn nội dung:** mô tả tóm tắt từ danh mục có sẵn; chưa có repository, demo, kết quả hoặc ảnh sản phẩm riêng cho từng dự án. Liên kết trong dialog hiện dẫn đến hồ sơ GitHub.
+
+## 5. Kinh nghiệm Hội, kỹ năng mềm và hoạt động
+
+### 5.1. Kinh nghiệm
+
+Bổ sung kinh nghiệm từng làm **Liên chi Hội trưởng Khoa Vật lý – Vật lý kỹ thuật**, giới thiệu quá trình tạo ra và tổ chức hoạt động cho sinh viên.
+
+### 5.2. Kỹ năng mềm
+
+- Lãnh đạo và làm việc nhóm: kết nối thành viên, phân công và phối hợp.
+- Lập kế hoạch và tổ chức: xây dựng chương trình, sắp xếp nguồn lực, theo dõi tiến độ.
+- Giao tiếp và kết nối: trao đổi, phối hợp các bên, truyền đạt thông tin.
+- Giải quyết vấn đề: xử lý tình huống, quản lý thời gian và trách nhiệm.
+
+Các kỹ năng được diễn đạt từ kinh nghiệm người dùng cung cấp; không gán điểm hoặc mức chứng nhận.
+
+### 5.3. Các thẻ đang hiển thị
+
+- Liên chi Hội.
+- Xuân tình nguyện.
+- GreenDay.
+- Lễ tuyên dương Sinh viên 5 Tốt.
+
+Thi thử TOEIC và các chương trình khác được nhắc trong phần giới thiệu công tác Hội; hiện không có thẻ TOEIC riêng trong danh sách.
+
+Chưa bổ sung nhiệm kỳ, năm tổ chức, số người tham gia hoặc kết quả định lượng vì chưa có dữ liệu cụ thể.
+
+## 6. Thành tích
+
+Ba thẻ thành tích:
+
+1. Giấy chứng nhận **Thanh niên tiên tiến làm theo lời Bác**.
+2. Bằng khen **Hội Sinh viên Thành phố** về thành tích xuất sắc trong chiến dịch Xuân tình nguyện.
+3. Giấy khen **Hội Sinh viên Thành phố** về hoàn thành xuất sắc nhiệm vụ.
+
+Mỗi thẻ có loại ghi nhận, tiêu đề, mô tả và khung ảnh. Ảnh giấy khen dùng `object-fit: contain` để giữ trọn nội dung, trong khi ảnh hoạt động dùng `cover` để lấp khung.
+
+## 7. Slideshow ảnh
+
+`photos.js` cấu hình một đường dẫn hoặc danh sách đường dẫn cho từng `data-photo` trong HTML.
+
+- Một ảnh: hiển thị ảnh, không thêm điều khiển slideshow.
+- Từ hai ảnh: mũi tên trước/sau, các chấm phía dưới và chuyển vòng.
+- Chấm sáng thể hiện ảnh đang xem; bấm chấm để chọn trực tiếp.
+- Tự chuyển sau **3 giây** theo cấu hình hiện tại trong `gallery.js`.
+- Hiệu ứng trượt ngang khoảng **0,45 giây** theo CSS hiện tại.
+- Kéo bằng chuột hoặc vuốt ngang để chuyển ảnh; ảnh đi theo thao tác kéo.
+- Kéo chưa đủ ngưỡng hoặc bị hủy sẽ trở lại ảnh hiện tại; thao tác dọc ưu tiên cuộn trang.
+- Phím trái/phải chuyển ảnh khi focus trong khung.
+- Tạm ngừng tự chuyển khi hover, focus, đang kéo, khung ngoài viewport hoặc tab bị ẩn.
+- Tắt tự chuyển khi người dùng bật giảm chuyển động.
+- Không có nút tạm dừng/tiếp tục và không có bộ đếm dạng số, theo yêu cầu giao diện.
+- Khung chưa có ảnh hoặc ảnh lỗi hiển thị placeholder, không cộng thêm chiều cao của thẻ ảnh trống.
+- Vùng ảnh và slideshow cùng tỷ lệ 16:10; track được đặt tuyệt đối để giữ chiều cao.
+- Nút mũi tên nhỏ, nền trong suốt; mũi tên vẽ bằng CSS để căn giữa ổn định.
+- Ảnh dùng lazy loading và được cấu hình alt tương ứng.
+
+## 8. Form gửi email tại chỗ
+
+**Email nhận:** `nguyennhatdang89@gmail.com`.
+
+- Dùng FormSubmit làm dịch vụ backend; không có server gửi email tự triển khai trong repository.
+- Khi JavaScript hoạt động, gửi POST JSON đến endpoint AJAX, giữ người dùng trên portfolio.
+- Kiểm tra tên, email và lời nhắn bắt buộc; email theo định dạng trình duyệt; lời nhắn ít nhất 10 ký tự sau trim và tối đa 3000 ký tự.
+- Hiển thị bộ đếm ký tự.
+- Trong lúc gửi: khóa nút, chặn gửi lặp, đặt trường nhập read-only và thông báo đang gửi.
+- Chỉ reset form khi HTTP thành công và dịch vụ trả `success` là true.
+- Phản hồi thành công được diễn đạt là dịch vụ đã tiếp nhận, không khẳng định email đã tới hộp thư.
+- Lỗi hoặc timeout 30 giây giữ lại nội dung và khôi phục khả năng gửi.
+- Đã bỏ sao chép, tải TXT, xóa nháp; không lưu/khôi phục nội dung liên hệ bằng localStorage. Nháp của phiên bản cũ được xóa khi khởi tạo.
+- Giữ action POST thường làm phương án dự phòng khi JavaScript không hoạt động; trường hợp này dịch vụ có thể chuyển sang trang riêng.
+
+FormSubmit yêu cầu kích hoạt địa chỉ nhận khi dùng lần đầu. Việc nhận email còn phụ thuộc dịch vụ và hộp thư. Tên, email và lời nhắn được gửi cho dịch vụ bên thứ ba.
+
+Tài liệu tích hợp: https://formsubmit.co/ajax-documentation .
+
+## 9. Sửa lỗi và khả năng tiếp cận
+
+- Sửa nhãn GitHub/LinkedIn bị đảo ở bản đầu.
+- Sửa thuộc tính `name` bị lặp trong form.
+- Chuẩn hóa tag Python bị dư khoảng trắng.
+- Chuẩn hóa đường dẫn ảnh thành đường dẫn tương đối, tên file khớp chữ hoa/thường trong Git để tránh lỗi khi triển khai.
+- Cập nhật ảnh Xuân tình nguyện dung lượng thấp hơn và thêm ảnh thứ sáu.
+- Thêm meta description và theme-color.
+- Thêm skip link, trạng thái focus rõ, nhãn điều khiển, aria-current cho chấm và khu vực, aria-live cho thông báo, aria-busy trong lúc gửi.
+- Hỗ trợ giảm chuyển động cho cuộn và hiệu ứng.
+- Nội dung dự án được gán qua `textContent`, không nội suy vào HTML.
+- Xử lý lỗi localStorage cho theme và lỗi gửi form.
+
+Chưa đo đầy đủ contrast, tốc độ tải, Lighthouse hoặc kiểm tra với trình đọc màn hình. Ảnh vẫn cần tối ưu thêm nếu triển khai cho nhiều người dùng.
+
+## 10. Cấu trúc code dùng chung
+
+| File / class | Trách nhiệm |
 | --- | --- |
-| Chi tiết dự án | Bấm “Khám phá dự án” trên thẻ để mở hộp thoại có mô tả, công nghệ và liên kết hồ sơ GitHub. Đóng bằng nút ×, Escape hoặc bấm ngoài hộp thoại. |
-| Tìm kiếm mở rộng | Tìm theo tên, mô tả, chủ đề và công nghệ. Hỗ trợ tiếng Việt không dấu, ví dụ `ran san moi`. |
-| Phím tắt tìm kiếm | Nhấn `/` khi không nhập liệu và không mở chi tiết để đưa con trỏ vào ô tìm kiếm. |
-| Sắp xếp | Chọn thứ tự mặc định hoặc tên A–Z. Có thể kết hợp tìm kiếm và lọc công nghệ. |
-| Số lượng kết quả | Hiển thị số dự án phù hợp trên tổng số dự án. |
-| Trạng thái không có kết quả | Hiển thị hướng dẫn và nút “Xóa bộ lọc” để đặt lại tìm kiếm, công nghệ và sắp xếp. |
-| Menu di động | Menu thu gọn trên màn hình nhỏ; đóng khi chọn liên kết hoặc nhấn Escape. |
-| Điều hướng theo khu vực | Đánh dấu mục điều hướng tương ứng với phần đang xuất hiện trên màn hình. |
-| Về đầu trang | Nút ↑ xuất hiện sau khi cuộn hơn 500px. |
-| Lưu nháp lời nhắn | Tên, email và nội dung được lưu trong localStorage khi nhập; khôi phục khi mở lại trang. Có nút xóa nháp. |
-| Sao chép lời nhắn | Kiểm tra dữ liệu rồi sao chép nội dung có định dạng để gửi qua mạng xã hội. Nếu clipboard không khả dụng, hướng dẫn tải file. |
-| Tải lời nhắn | Tạo file UTF-8 `loi-nhan-nhat-dang.txt` sau khi dữ liệu hợp lệ. |
-| Kiểm tra form | Tên và email bắt buộc; email đúng định dạng; lời nhắn ít nhất 10 ký tự sau khi bỏ khoảng trắng và tối đa 3000 ký tự. |
-| Giao diện sáng/tối | Cải thiện phối màu cho toàn trang. Giữ lựa chọn của người dùng; lấy giao diện hệ thống khi chưa có lựa chọn. |
-| Năm bản quyền | Tự cập nhật theo năm của trình duyệt. |
+| `index.html` | Bố cục, nội dung, form và các khung ảnh |
+| `styles.css` | Theme, responsive và kiểu dáng |
+| `app.js` | Điều hướng, theme, tìm kiếm/lọc/sắp xếp, dialog dự án và gửi email |
+| `slider.js` | Tự khởi tạo thanh trượt danh sách theo class và aria-controls |
+| `gallery.js` | Slideshow ảnh, mũi tên, chấm, vuốt và timer |
+| `data.js` | Dữ liệu dự án |
+| `photos.js` | Cấu hình đường dẫn ảnh |
+| `.card-slider` | Bố cục cuộn chung; biến số cột, hàng, khoảng cách và chiều rộng di động |
+| `.surface-card` | Nền, viền và bo góc chung cho thẻ/form |
+| `.arrow-button` | Hình tròn, kích thước và căn giữa mũi tên |
+| `.arrow-prev`, `.arrow-next` | Hướng mũi tên |
+| `.slider-arrow`, `.gallery-arrow` | Biến thể nút danh sách và slideshow |
+| `.select-control` | Căn mũi tên ô chọn sắp xếp |
 
-## 3. Cải thiện chất lượng
+Các phần slider riêng trùng nhau đã được gom. Dùng biến CSS để giữ khác biệt về số cột/hàng; không cần thêm hàm gọi riêng cho mỗi mục mới. Hướng dẫn chi tiết: `CAU_TRUC_CODE.md`.
 
-- Sửa nhãn GitHub/LinkedIn bị đảo trong bản cũ.
-- Sửa thuộc tính `name` bị lặp ở trường họ tên.
-- Chuẩn hóa tag `Python` bị dư khoảng trắng.
-- Tách logic đổi theme từ HTML sang `app.js`.
-- Thêm meta description, liên kết bỏ qua điều hướng, focus bàn phím rõ ràng, nhãn nút và thông báo live cho kết quả/form.
-- Hỗ trợ tùy chọn giảm chuyển động của hệ điều hành.
-- Nội dung dự án được đưa vào DOM bằng `textContent`, không nội suy thành HTML.
-- Xử lý lỗi localStorage/clipboard để các thao tác còn lại vẫn dùng được.
+## 11. Bổ sung nội dung
 
-## 4. Các file thay đổi
+### Dự án
 
-- `index.html`: bố cục, nội dung, form, menu, hộp thoại, metadata.
-- `styles.css`: hệ thống màu, responsive, thẻ dự án, trạng thái focus và giao diện tối.
-- `app.js`: tìm kiếm, lọc, sắp xếp, chi tiết, điều hướng, theme và soạn lời nhắn.
-- `data.js`: dữ liệu sáu dự án với mô tả, nhóm chủ đề và ký hiệu hiển thị.
-- `BAO_CAO_NANG_CAP.md`: báo cáo này.
+Thêm đối tượng vào `projects` trong `data.js`, gồm `id` duy nhất, `title`, `tag`, `category`, `description`, `symbol`. Các chức năng render/lọc/tìm kiếm/sắp xếp tự áp dụng.
 
-## 5. Kiểm tra đã thực hiện
+### Hoạt động hoặc thành tích
 
-- Kiểm tra cú pháp ES module cho `app.js` và `data.js`: đạt.
-- Kiểm tra ID/thuộc tính HTML không trùng, liên kết nội bộ, nhãn form và file tài nguyên: đạt.
-- Kiểm tra dữ liệu sáu dự án, ID duy nhất và tag chuẩn hóa: đạt.
-- Kiểm tra tìm kiếm không dấu, tìm theo công nghệ, lọc Python, kết hợp bộ lọc và trường hợp không có kết quả: đạt.
-- `git diff --check`: đạt; Git có cảnh báo chuẩn hóa LF/CRLF trên Windows.
-- Chưa xác minh bằng trình duyệt hoặc ảnh chụp giao diện. Kiểm tra HTTP cục bộ bị môi trường hạn chế kết nối socket (WinError 10013). Cần kiểm tra thêm giao diện thực tế, menu, dialog, clipboard và tải file trong trình duyệt.
+Thêm thẻ đúng cấu trúc vào danh sách tương ứng trong HTML, giữ `.surface-card`, `.portfolio-photo`, thẻ ảnh và `.photo-placeholder`. Khai báo `data-photo` duy nhất và thêm khóa tương ứng trong `photos.js`.
 
-## 6. Chạy dự án
+### Ảnh
 
-Tại thư mục dự án, chạy:
+```js
+'xuan-tinh-nguyen': [
+  'assets/activities/XTN-1.jpg',
+  'assets/activities/XTN-2.jpg',
+],
+```
+
+Tên và phần mở rộng phải khớp file thực tế. Dùng dấu `/` và đường dẫn tương đối; không dùng đường dẫn ổ đĩa Windows. Để `''` hoặc `[]` khi chưa có ảnh.
+
+### Thời gian slideshow
+
+- Chu kỳ tự chuyển: số mili giây trong `setInterval` ở `gallery.js`, hiện `3000`.
+- Thời lượng hiệu ứng: `transition: transform .45s ...` ở `.gallery-track` trong CSS.
+
+## 12. Chạy và kiểm tra
+
+Chạy tại thư mục repository:
 
 ```powershell
 python -m http.server 5173 --bind 127.0.0.1
 ```
 
-Mở `http://127.0.0.1:5173` bằng trình duyệt. Dùng HTTP thay vì mở trực tiếp `index.html` để ES module được tải đúng. Clipboard yêu cầu môi trường an toàn và quyền của trình duyệt; localhost thường được hỗ trợ. Nếu sao chép thất bại, dùng “Tải .txt”.
+Mở `http://127.0.0.1:5173`. Có thể dùng Live Server. Dùng HTTP/HTTPS thay vì mở file HTML trực tiếp để module và dịch vụ form hoạt động đúng.
 
-## 7. Giới hạn và dữ liệu cần bổ sung
+Các kiểm tra đã thực hiện trong quá trình phát triển:
 
-Form hiện là công cụ soạn lời nhắn, **không gửi email hoặc gửi tin tự động**. Dự án chưa có backend, email nhận tin hoặc dịch vụ gửi form. Người dùng cần tự gửi nội dung qua GitHub/LinkedIn.
+- Cú pháp JavaScript của các module.
+- Cấu trúc HTML, ID, liên kết nội bộ và liên kết điều khiển.
+- Dữ liệu dự án, tìm kiếm không dấu, công nghệ, kết hợp bộ lọc và trạng thái rỗng.
+- DOM mô phỏng cho slideshow: chuyển vòng, chấm, timer, hover, kéo/vuốt, hủy kéo và ảnh lỗi.
+- DOM mô phỏng cho thanh trượt: cuộn độc lập và trạng thái nút đầu/cuối.
+- Mô phỏng phản hồi form thành công/thất bại: reset khi thành công, giữ nội dung khi lỗi.
+- Tồn tại và chữ hoa/thường của đường dẫn ảnh cấu hình.
+- `git diff --check` trước các lần commit.
 
-Nháp được lưu trên trình duyệt đang sử dụng và có thể còn trên máy dùng chung. Dùng “Xóa nháp” để xóa thông tin sau khi dùng.
+**Giới hạn xác minh:** chưa có kiểm thử trình duyệt toàn diện trên phiên bản cuối, chưa đo Lighthouse; kiểm thử form mô phỏng không thay thế việc kiểm tra nhận email thực tế.
 
-Mô tả dự án được tóm tắt từ tên và công nghệ có sẵn; chưa xác minh mã nguồn, kết quả hoặc mức độ hoàn thành từng dự án. Liên kết trong hộp thoại dẫn đến hồ sơ GitHub, chưa phải repository riêng. Có thể cập nhật dữ liệu trong `data.js` khi có mô tả chính xác, ảnh chụp, repo và demo thực tế.
+## 13. Đồng bộ GitHub
 
-## 8. Bổ sung hoạt động Hội, kỹ năng mềm và thành tích
+Code, ảnh và tài liệu đã được push lên nhánh `main` của `FireHaru/Portpolio`. Commit code mới nhất khi viết báo cáo là `a0c8022` (căn mũi tên sắp xếp); trước đó `8f1c56e` cập nhật ảnh và đường dẫn.
 
-Theo thông tin chủ sở hữu cung cấp, đã bổ sung:
-
-- Vai trò **nguyên Liên chi Hội trưởng Khoa Vật lý – Vật lý kỹ thuật**.
-- Hoạt động: **Xuân tình nguyện**, **GreenDay**, **thi thử TOEIC**, **lễ tuyên dương Sinh viên 5 Tốt**, cùng nội dung giới thiệu các hoạt động khác.
-- Kỹ năng mềm gắn với kinh nghiệm công tác Hội: lãnh đạo và làm việc nhóm; lập kế hoạch và tổ chức; giao tiếp và kết nối; giải quyết vấn đề, quản lý thời gian và trách nhiệm.
-- Ba thành tích: giấy chứng nhận **Thanh niên tiên tiến làm theo lời Bác**; bằng khen **Hội Sinh viên Thành phố** về thành tích xuất sắc trong chiến dịch Xuân tình nguyện; giấy khen **Hội Sinh viên Thành phố** về hoàn thành xuất sắc nhiệm vụ.
-- Thêm mục điều hướng **Hoạt động** và **Thành tích**, tương thích với menu di động và đánh dấu khu vực đang xem.
-- Bảy khung ảnh: bốn khung hoạt động và ba khung giấy khen/chứng nhận. Chưa có ảnh hoặc ảnh tải lỗi sẽ hiển thị khung chờ. Ảnh giấy khen dùng `object-fit: contain` để không cắt nội dung; ảnh hoạt động dùng `cover`.
-
-### Cách bổ sung ảnh
-
-Đặt file vào `assets/activities/` hoặc `assets/achievements/`, rồi điền đường dẫn vào `photos.js`. Hướng dẫn và ví dụ đầy đủ nằm ở `assets/README.md`. Để giá trị rỗng nếu chưa có ảnh. Đây là cấu hình ảnh trong mã nguồn, không phải tính năng upload trực tuyến.
-
-Chưa thêm năm, nhiệm kỳ, tên trường, số lượng người tham gia hoặc đơn vị cấp chứng nhận chi tiết vì chưa có thông tin. Các kỹ năng được diễn đạt từ kinh nghiệm công tác Hội, không gán điểm số hoặc mức độ chứng nhận.
-
-### Kiểm tra bổ sung
-
-Đã kiểm tra cú pháp JavaScript, ID và liên kết nội bộ HTML, bảy khóa cấu hình ảnh khớp bảy khung ảnh, tài nguyên hiện có và `git diff --check`. Chưa kiểm tra trực quan bằng trình duyệt.
-
-## 9. Slideshow nhiều ảnh cho hoạt động — cập nhật giao diện
-
-- `photos.js` nhận một đường dẫn hoặc danh sách nhiều đường dẫn cho mỗi khung.
-- `gallery.js` quản lý slideshow độc lập cho từng hoạt động/thành tích; `app.js` gọi khởi tạo.
-- Từ hai ảnh trở lên: mũi tên trước/sau, các chấm chọn ảnh ở phía dưới, chuyển vòng và tự chuyển mỗi 5 giây.
-- Chấm sáng thể hiện ảnh đang xem; bấm chấm để chọn trực tiếp. Đã bỏ nút tạm dừng/tiếp tục và bộ đếm số theo yêu cầu.
-- Hiệu ứng trượt ngang khi đổi ảnh; kéo bằng chuột hoặc vuốt ngang trên điện thoại. Kéo chưa đủ ngưỡng hoặc bị hủy sẽ trở về ảnh hiện tại; thao tác dọc vẫn cuộn trang.
-- Hỗ trợ phím trái/phải khi focus trong khung. Tạm ngừng tự chuyển khi hover, focus, kéo ảnh, ngoài viewport hoặc tab bị ẩn.
-- Khi bật giảm chuyển động: không tự chuyển và không chạy hiệu ứng trượt; điều khiển thủ công vẫn hoạt động.
-- Ảnh tải lỗi hiển thị khung chờ riêng cho ảnh đó. Khung một ảnh không hiện mũi tên/chấm.
-
-Kiểm tra: cú pháp module và `git diff --check` đạt. Kiểm tra DOM mô phỏng đạt cho số lượng/trạng thái chấm, chọn chấm, biến đổi trượt ảnh, chu kỳ 5000ms, chuyển vòng, kéo/vuốt hai chiều, kéo ngắn, hủy kéo và thao tác dọc. Chưa kiểm tra trực quan bằng trình duyệt. Hướng dẫn sử dụng đã cập nhật ở `assets/README.md`.
-
-## 10. Sửa khung ảnh và căn giữa mũi tên
-
-- Khung chưa cấu hình ảnh: ẩn thẻ ảnh không có nguồn, hiện một khung chờ duy nhất để tránh chiều cao gấp đôi.
-- Track slideshow đặt tuyệt đối trong vùng ảnh tỷ lệ 16:10 để chiều cao không tăng theo nội dung.
-- Mũi tên dùng nét vẽ CSS thay ký tự chữ; căn giữa theo hình học trong nút tròn nhỏ, trong suốt.
-- Kiểm tra cú pháp, trạng thái khung không ảnh bằng DOM mô phỏng và `git diff --check`: đạt. Chưa kiểm tra trực quan trên trình duyệt.
-
-## 11. Thành tích trong một hàng cuộn ngang
-
-- Các thẻ thành tích luôn nằm trên một hàng, không xuống dòng khi bổ sung thẻ.
-- Desktop hiển thị ba thẻ, tablet hai thẻ, điện thoại một thẻ và một phần thẻ tiếp theo.
-- Nút trái/phải cuộn theo chiều rộng một thẻ; tự vô hiệu hóa ở đầu/cuối danh sách. Có thể vuốt ngang hoặc dùng phím trái/phải khi focus danh sách.
-- Thêm thành tích mới bằng cách chèn `article.achievement-card` bên trong `#achievement-list`; khai báo khóa ảnh tương ứng trong `photos.js` nếu có ảnh.
-- Kiểm tra cú pháp JavaScript và `git diff --check`: đạt. Chưa kiểm tra trực quan bằng trình duyệt.
-
-## 12. Hoạt động trong một hàng cuộn ngang
-
-- Danh sách hoạt động luôn nằm trên một hàng; desktop/tablet hiện hai thẻ, điện thoại hiện một thẻ và một phần thẻ tiếp theo.
-- Thêm nút trái/phải, cuộn ngang và điều hướng bàn phím khi focus danh sách. Các nút tự vô hiệu hóa ở đầu/cuối.
-- Hai hàng hoạt động/thành tích dùng chung hàm điều khiển nhưng vận hành độc lập. Slideshow trong từng thẻ vẫn hoạt động riêng.
-- Thêm hoạt động mới bằng cách chèn `article.activity-card` trong `#activity-list`, rồi khai báo ảnh trong `photos.js`.
-- Kiểm tra cú pháp JavaScript và `git diff --check`: đạt. Chưa kiểm tra trực quan bằng trình duyệt.
-
-## 13. Gửi lời nhắn về email bằng FormSubmit
-
-- Form POST đến `https://formsubmit.co/nguyennhatdang89@gmail.com`, dùng dịch vụ backend FormSubmit thay cho backend tự triển khai.
-- Nút chính là “Gửi lời nhắn”; giữ các nút sao chép, tải file và xóa nháp riêng.
-- Form chuyển sang trang dịch vụ để thực hiện xác minh và xử lý gửi; giữ reCAPTCHA mặc định, không báo thành công từ JavaScript trước khi dịch vụ xử lý.
-- Lần gửi đầu tiên yêu cầu chủ hộp thư mở email kích hoạt từ FormSubmit. Sau khi xác nhận, gửi lại để kiểm tra nhận tin. Kiểm tra thư mục Spam nếu chưa thấy email.
-- Tên, email và lời nhắn được chuyển đến dịch vụ bên thứ ba; thông tin này được nêu ngay trên form. Email người gửi cho phép chủ hộp thư trả lời.
-- Chạy website qua HTTP/HTTPS. Bản nháp vẫn lưu cục bộ; dùng “Xóa nháp” sau khi gửi nếu muốn xóa.
-- Kiểm tra cú pháp JavaScript, cấu hình POST, các trường có tên và `git diff --check`: đạt. Chưa gửi tin thực tế hoặc xác minh kích hoạt/nhận email.
-
-Tài liệu dịch vụ: https://formsubmit.co/ . Phần này thay thế giới hạn “form không gửi email” ở mục 7.
-
-## 14. Gửi tại chỗ và làm trống form
-
-- Chuyển sang FormSubmit AJAX theo https://formsubmit.co/ajax-documentation; gửi trong trang, không chuyển sang trang Thanks khi JavaScript hoạt động.
-- Chỉ reset form và bộ đếm sau phản hồi HTTP thành công với `success` là true. Lỗi giữ nội dung để thử lại.
-- Chặn gửi lặp, hiển thị trạng thái đang gửi, khóa nhập tạm thời và xử lý timeout 30 giây.
-- Bỏ sao chép, tải TXT, xóa nháp; ngừng lưu/khôi phục nháp và xóa dữ liệu nháp cũ trên trình duyệt.
-- Kiểm tra cú pháp, diff và mô phỏng phản hồi thành công/thất bại: đạt. Chưa thử gửi email thực tế qua AJAX.
-- Form POST cũ giữ làm phương án dự phòng khi JavaScript không hoạt động; trường hợp này dịch vụ có thể vẫn chuyển trang.
-
-## 15. Dự án giới hạn hai hàng và cuộn ngang
-
-- Desktop hiện tối đa 6 dự án trong 3 cột × 2 hàng. Các dự án thêm nằm bên phải, dùng thanh cuộn hoặc nút trái/phải để xem.
-- Tablet hiện 2 cột × 2 hàng; điện thoại 1 cột × 2 hàng để giữ kích thước thẻ dễ đọc.
-- Nút điều hướng chỉ hiện khi danh sách tràn ngang; hỗ trợ bàn phím khi focus danh sách.
-- Tìm kiếm/lọc/sắp xếp vẫn áp dụng toàn bộ dữ liệu và đưa danh sách về vị trí đầu.
-- Kiểm tra cú pháp JavaScript và `git diff --check`: đạt; chưa kiểm tra trực quan trên trình duyệt.
-
-## 16. Bộ công cụ trong một hàng trượt ngang
-
-- “Những gì mình sử dụng” chuyển thành hàng cuộn ngang, có nút trước/sau và vuốt trên điện thoại.
-- Desktop hiện 3 thẻ, tablet 2 thẻ, điện thoại 1 thẻ và một phần thẻ tiếp theo. Thẻ thêm mới không xuống dòng.
-- Dùng lại điều khiển danh sách, vô hiệu hóa nút tại đầu/cuối; hỗ trợ phím trái/phải khi focus danh sách.
-- Kiểm tra cú pháp JavaScript và `git diff --check`: đạt. Chưa kiểm tra trực quan bằng trình duyệt.
-
-## 17. Thử nghiệm bố cục ưu tiên nội dung
-
-- Kỹ năng: hiện ba nhóm trên desktop; chỉ cuộn ngang trên điện thoại. Điều khiển chỉ hiện khi tràn.
-- Dự án: lưới 3 cột trên desktop, 2 cột tablet, 1 cột điện thoại; hiển thị 6 mục đầu và nút “Xem thêm” thêm mỗi lần 6 mục. Tìm kiếm/lọc/sắp xếp đặt lại giới hạn về 6. Với dữ liệu hiện tại chỉ có 6 dự án, nút được ẩn.
-- Hoạt động/thành tích: giữ một hàng cuộn ngang, hé thẻ tiếp theo; nút chỉ xuất hiện khi có nội dung bị khuất.
-- Ảnh trong thẻ là ảnh bìa tĩnh; bấm “Xem ảnh” mở dialog lớn. Chuyển ảnh bằng mũi tên/chấm/phím hoặc vuốt trong dialog; đóng bằng Escape, nút × hoặc bấm bên ngoài. Giấy khen hiển thị trọn ảnh.
-- Loại bỏ tự chuyển ảnh trong thẻ để tránh hai lớp thao tác ngang.
-- Kiểm tra cú pháp hai module, cấu trúc HTML, ID/liên kết điều khiển và diff: đạt. Chưa kiểm tra trực quan bằng trình duyệt.
-
-## 18. Hoàn tác bản thử nghiệm bố cục
-
-Đã trở về thanh trượt chung cho kỹ năng, hoạt động, thành tích và dự án (hai hàng). Bỏ “Xem thêm” và cửa sổ xem ảnh thử nghiệm; slideshow trở lại ngay trong thẻ với mũi tên, chấm, vuốt và tự chuyển 3 giây như cấu hình trước thử nghiệm. Giữ các sửa lỗi khung ảnh, căn giữa mũi tên và form gửi email tại chỗ. Kiểm tra cú pháp và diff đạt.
-
-## 19. Gom thành phần dùng chung
-
-- Xóa các khai báo slider riêng và các bản `.card-slider` bị lặp; dùng một bộ CSS với biến số cột/hàng/khoảng cách và hai breakpoint responsive.
-- Thêm `.surface-card` dùng chung nền, viền, bo góc cho kỹ năng, dự án, hoạt động, thành tích và form.
-- Thêm `.arrow-button`, `.arrow-prev`, `.arrow-next` dùng chung hình mũi tên; giữ biến thể màu/kích thước riêng cho danh sách và ảnh.
-- Tách khởi tạo thanh trượt sang `slider.js`, tự nhận class/aria-controls, không khai báo riêng từng danh sách trong app.
-- Giữ cấu hình hiện tại: dự án hai hàng, slideshow trong thẻ và form gửi email tại chỗ.
-- Hướng dẫn thêm thành phần: `CAU_TRUC_CODE.md`.
-- Kiểm tra cú pháp module, liên kết 4 slider/8 nút, class thẻ, CSS không còn bố cục slider riêng và mô phỏng cuộn độc lập/trạng thái đầu-cuối: đạt. `git diff --check`: đạt. Chưa kiểm tra trực quan bằng trình duyệt.
+File báo cáo được viết lại sau các commit trên; cần commit/push riêng nếu muốn bản báo cáo cập nhật xuất hiện trên GitHub.
