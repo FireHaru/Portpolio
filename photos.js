@@ -1,5 +1,5 @@
 // Mỗi mục nhận một đường dẫn hoặc danh sách đường dẫn ảnh.
-// Nhiều ảnh: hiện mũi tên và tự chuyển sau 5 giây. Để '' hoặc [] nếu chưa có ảnh.
+// Nhiều ảnh: hiện mũi tên và tự chuyển sau 3 giây. Để '' hoặc [] nếu chưa có ảnh.
 export const portfolioPhotos = {
   'Lien-chi-Hoi': [
     'assets/activities/LCH-1.jpg',
@@ -9,26 +9,27 @@ export const portfolioPhotos = {
     'assets/activities/LCH-5.jpg',
   ],
   'xuan-tinh-nguyen': [
-    'assets/activities/XTN-1.JPG',
-    'assets/activities/XTN-2.JPG',
-    'assets/activities/XTN-3.JPG',
-    'assets/activities/XTN-4.JPEG',
-    'assets/activities/XTN-5.JPG',
+    'assets/activities/XTN-1.jpg',
+    'assets/activities/XTN-2.jpg',
+    'assets/activities/XTN-3.jpg',
+    'assets/activities/XTN-4.jpg',
+    'assets/activities/XTN-5.jpg',
+    'assets/activities/XTN-6.jpg',
   ],
   'greenday': [
-    '/assets/activities/GD-1.jpg',
-    '/assets/activities/GD-2.jpg',
-    '/assets/activities/GD-3.jpg',
+    'assets/activities/GD-1.jpg',
+    'assets/activities/GD-2.jpg',
+    'assets/activities/GD-3.jpg',
   ],
   'sinh-vien-5-tot': [
-    '/assets/activities/SV5T-1.jpg',
-    '/assets/activities/SV5T-2.jpg',
-    '/assets/activities/SV5T-3.jpg',
-    '/assets/activities/SV5T-4.jpg',
-    '/assets/activities/SV5T-5.jpeg',
-    '/assets/activities/SV5T-6.jpeg',
+    'assets/activities/SV5T-1.jpg',
+    'assets/activities/SV5T-2.jpg',
+    'assets/activities/SV5T-3.jpg',
+    'assets/activities/SV5T-4.jpg',
+    'assets/activities/SV5T-5.jpeg',
+    'assets/activities/SV5T-6.jpeg',
   ],
-  'thanh-nien-tien-tien': '/assets/achievements/LTLB.jpg',
-  'bang-khen-xuan-tinh-nguyen': '/assets/achievements/XTN.jpg',
-  'giay-khen-hoi-sinh-vien': '/assets/achievements/HSV.jpg',
+  'thanh-nien-tien-tien': 'assets/achievements/LTLB.jpg',
+  'bang-khen-xuan-tinh-nguyen': 'assets/achievements/XTN.jpg',
+  'giay-khen-hoi-sinh-vien': 'assets/achievements/HSV.jpg',
 };
