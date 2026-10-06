@@ -1,119 +1,91 @@
 <!DOCTYPE html>
 <html lang="vi">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nguyen Nhat Dang - Portfolio</title>
-    <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Portfolio Nguyễn Nhật Đăng — sinh viên Vật lý tin học, quan tâm dữ liệu, AI và xử lý hình ảnh.">
+  <meta name="theme-color" content="#102c27">
+  <title>Nguyễn Nhật Đăng · Portfolio</title>
+  <link rel="stylesheet" href="styles.css">
 </head>
-
 <body>
-    <header class="site-header container">
-        <a class="logo" href="#">Nhật Đăng</a>
-        <nav class="site-nav">
-            <ul>
-                <li><a href="#about">Giới thiệu</a></li>
-                <li><a href="#skills">Kỹ năng</a></li>
-                <li><a href="#projects">Dự án</a></li>
-                <li><a href="#contact">Liên hệ</a></li>
-            </ul>
-        </nav>
-        <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Bật chế độ tối" aria-pressed="false">
-            <span class="theme-icon theme-icon-sun" aria-hidden="true">☀</span>
-            <span class="theme-icon theme-icon-moon" aria-hidden="true">☾</span>
-            <span class="theme-toggle-knob" aria-hidden="true"></span>
-        </button>
-    </header>
-    <main class="container">
-        <section id="about" class="hero">
-            <div>
-                <h1>Xin chào, mình là Nguyễn Nhật Đăng</h1>
-                <p>Sinh viên Vật lý tin học thích số liệu và xử lý hình ảnh</p>
-                <a class="button" href="#contact">Liên hệ</a>
-            </div>
-            <img src="css/IMG_8045.jpeg" alt="Ảnh chân dung Nhật Đăng">
-        </section>
-        <section id="skills">
-            <h2>Kỹ năng</h2>
-            <div>
-                <ul class="tags">
-                    <li>Python</li>
-                    <li>C++</li>
-                    <li>HTML &amp; CSS</li>
-                    <li>JavaScript</li>
-                    <li>Git</li>
-                    <li>Xử lý hình ảnh</li>
-                </ul>
-            </div>
-        </section>
-        <section id="projects">
-                <h2>Dự án</h2>
-                <div class="projects">
-                    <article class="card">
-                        <h3>Mô hình Tool-Calling cho dữ liệu hành chính Việt Nam</h3>
-                        <p>Fine-tune mô hình nhỏ để chọn và nối chuỗi công cụ bản đồ từ câu lệnh tự nhiên. Đạt 100% chọn đúng công cụ trên nhóm 8 công cụ, tốn khoảng một nửa số token so với mô hình gốc.</p>
-                        <p>Python + LoRA + Qwen2.5</p>
-                    </article>
-                    <article class="card">
-                       <h3>Chatbot - SunGPT</h3>
-                        <p>Trợ lý hướng dẫn học lập trình, giúp người mới giải thích code, gỡ lỗi và hiểu khái niệm qua hội thoại. Xây dựng trên Gemini API. </p>
-                        <p>Python + Gemini + API Web</p>
-                    </article>
-                    <article class="card">
-                        <h3>Game Rắn săn mồi</h3>
-                        <p>Tái hiện trò chơi rắn săn mồi cổ điển: điều khiển rắn ăn mồi để dài ra, thua khi đâm vào tường hoặc vào thân mình. Tự viết vòng lặp game, xử lý phím bấm và va chạm.</p>
-                        <p>C++</p>
-                    </article>
-                </div>
-        </section>
-        <section id="contact">
-            <h2>Liên hệ</h2>
-            <form>
-                <div class="field">
-                    <label for="name">Họ và tên</label>
-                    <input id="name" name="" name="name" required>
-                </div>
-                <div class="field">
-                    <label for="email">Email</label>
-                    <input id="email" type="email" name="email" required>
-                </div>
-                <div class="field">
-                    <label for="msg">Lời nhắn</label>
-                    <textarea id="msg" name="msg"></textarea>
-                </div>
-                <button class="button">Gửi</button>
-            </form>
-        </section>
-    </main>
-    <footer>
-        <p>© 2026 Nguyễn Nhật Đăng</p>
-        <nav aria-label="Liên kết mạng xã hội">
-            <ul class="social-links">
-                <li><a href="https://www.linkedin.com/in/%C4%91%C4%83ng-nguy%E1%BB%85n-6239a1160/" target="_blank" rel="noopener noreferrer">GitHub</a></li>
-                <li><a href="https://github.com/FireHaru" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
-            </ul>
-        </nav>
-    </footer>
-    <script>
-        const themeToggle = document.querySelector('#theme-toggle');
-        const savedTheme = localStorage.getItem('theme');
-        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-        const initialTheme = savedTheme || (prefersDark ? 'dark' : 'light');
-
-        document.documentElement.dataset.theme = initialTheme;
-        themeToggle.setAttribute('aria-pressed', initialTheme === 'dark');
-        themeToggle.setAttribute('aria-label', initialTheme === 'dark' ? 'Bật chế độ sáng' : 'Bật chế độ tối');
-
-        themeToggle.addEventListener('click', () => {
-            const nextTheme = document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark';
-
-            document.documentElement.dataset.theme = nextTheme;
-            localStorage.setItem('theme', nextTheme);
-            themeToggle.setAttribute('aria-pressed', nextTheme === 'dark');
-            themeToggle.setAttribute('aria-label', nextTheme === 'dark' ? 'Bật chế độ sáng' : 'Bật chế độ tối');
-        });
-    </script>
+  <a class="skip-link" href="#main">Đến nội dung chính</a>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="logo" href="#about"><span class="logo-mark">Đ.</span> Nhật Đăng<span class="logo-dot">/ portfolio</span></a>
+      <nav class="site-nav" id="site-nav" aria-label="Điều hướng chính"><a href="#about">Giới thiệu</a><a href="#skills">Kỹ năng</a><a href="#projects">Dự án</a><a href="#community">Hoạt động</a><a href="#achievements">Thành tích</a><a href="#contact">Liên hệ ↗</a></nav>
+      <div class="header-actions"><button class="icon-button" id="theme-toggle" type="button" aria-label="Đổi giao diện" aria-pressed="false">☾</button><button class="icon-button menu-toggle" id="menu-toggle" type="button" aria-label="Mở menu" aria-controls="site-nav" aria-expanded="false">☰</button></div>
+    </div>
+  </header>
+  <main id="main" class="container">
+    <section id="about" class="hero">
+      <div class="hero-copy"><h1>Từ dữ liệu<br>đến <em>ý tưởng.</em></h1><p class="hero-intro">Xin chào, mình là <strong>Nguyễn Nhật Đăng.</strong></p><p class="muted">Sinh viên Vật lý tin học, yêu thích khoa học và công nghệ. Mình khám phá cách lập trình và AI biến những bài toán thú vị thành sản phẩm thực tế. Xây dựng những sản phẩm công nghệ giúp ích cho xã hội và đời sống</p><div class="actions"><a class="button" href="#projects">Khám phá dự án <span>↗</span></a><a class="text-link" href="#contact">Kết nối với mình →</a></div><div class="hero-notes"><span>01 / Trí tuệ nhân tạo</span><span>02 / Hình ảnh</span><span>03 / Số liệu</span><span>04 / Khoa học</span></div></div>
+      <div class="portrait-wrap"><div class="portrait-top"><span>MỘT CHÚT VỀ MÌNH</span><span>↗</span></div><img src="assets/pics/avt.jpeg" alt="Ảnh chân dung Nguyễn Nhật Đăng" fetchpriority="high"><div class="portrait-caption"><div><strong>Nguyễn Nhật Đăng</strong><span>Vật lý tin học</span></div><span class="portrait-symbol">✳</span></div></div>
+    </section>
+    <section id="skills" class="section"><div class="section-heading"><div><p class="eyebrow">01 — BỘ CÔNG CỤ</p><h2>Những gì mình sử dụng</h2></div><p class="muted">Học qua từng bài toán.<br>Phát triển qua từng dự án.</p></div><div class="slider-navigation" aria-label="Điều khiển danh sách kỹ năng"><button class="arrow-button arrow-prev slider-arrow" data-slider-direction="-1" type="button" aria-label="Xem kỹ năng trước" aria-controls="skills-list"></button><button class="arrow-button arrow-next slider-arrow" data-slider-direction="1" type="button" aria-label="Xem kỹ năng tiếp theo" aria-controls="skills-list"></button></div><div class="skill-grid card-slider" id="skills-list" tabindex="0" role="region" aria-label="Danh sách kỹ năng, cuộn ngang để xem thêm"><article class="skill-card surface-card"><span class="skill-icon">{ }</span><h3>Lập trình</h3><p>Nền tảng để xây dựng và thử nghiệm ý tưởng.</p><ul class="tags"><li>Python</li><li>C/C++</li><li>Git</li></ul></article><article class="skill-card surface-card"><span class="skill-icon">✳</span><h3>AI & dữ liệu</h3><p>Khám phá mô hình, dữ liệu và thị giác máy tính.</p><ul class="tags"><li>Machine Learning</li><li>NLP</li><li>Xử lý hình ảnh số</li></ul></article><article class="skill-card surface-card"><span class="skill-icon">↗</span><h3>Phát triển web</h3><p>Đưa ý tưởng lên những giao diện có thể tương tác.</p><ul class="tags"><li>HTML & CSS</li><li>JavaScript</li><li>API</li></ul></article></div></section>
+    <section id="projects" class="section"><div class="section-heading"><div><p class="eyebrow">02 — KHÔNG GIAN THỬ NGHIỆM</p><h2>Một vài dự án của mình</h2></div><a class="text-link" href="https://github.com/FireHaru" target="_blank" rel="noopener noreferrer">Ghé GitHub ↗</a></div><div class="project-controls"><label class="search-field"><span aria-hidden="true">⌕</span><input id="project-search" type="search" placeholder="Tìm dự án, công nghệ, chủ đề…" aria-label="Tìm dự án"><kbd>/</kbd></label><label class="sort-label">Sắp xếp <select id="project-sort"><option value="default">Mặc định</option><option value="name">Tên A–Z</option></select></label></div><div id="filters" aria-label="Lọc theo công nghệ"></div><p id="project-count" class="result-count" role="status" aria-live="polite"></p><div class="slider-navigation" id="project-navigation" data-hide-if-fit aria-label="Điều khiển danh sách dự án" hidden><button class="arrow-button arrow-prev slider-arrow" data-slider-direction="-1" type="button" aria-label="Xem dự án trước" aria-controls="project-list"></button><button class="arrow-button arrow-next slider-arrow" data-slider-direction="1" type="button" aria-label="Xem dự án tiếp theo" aria-controls="project-list"></button></div><ul id="project-list" class="projects card-slider" style="--slider-rows: 2; --slider-gap: 16px; --slider-mobile-width: 100%" tabindex="0" aria-label="Danh sách dự án, cuộn ngang để xem thêm"></ul><div id="empty-state" class="empty-state" hidden><h3>Chưa tìm thấy dự án phù hợp.</h3><p>Thử từ khóa khác hoặc bỏ bộ lọc hiện tại.</p><button class="button secondary" id="reset-filters" type="button">Xóa bộ lọc</button></div><noscript>Bật JavaScript để xem danh sách dự án và sử dụng bộ lọc.</noscript></section>
+    <section id="community" class="section">
+      <div class="section-heading"><div><p class="eyebrow">03 — KẾT NỐI & CỐNG HIẾN</p><h2>Trưởng thành cùng cộng đồng</h2></div><p class="muted">Từ tổ chức hoạt động<br>đến kết nối con người.</p></div>
+      <article class="leadership-card"><div><p class="eyebrow">KINH NGHIỆM CÔNG TÁC HỘI</p><h3>Liên chi Hội trưởng</h3><p class="leadership-faculty">Khoa Vật lý – Vật lý kỹ thuật</p></div><p>Trong vai trò Liên chi Hội trưởng, mình đã tạo ra và tổ chức các hoạt động dành cho sinh viên: Xuân tình nguyện, GreenDay, thi thử TOEIC, lễ tuyên dương Sinh viên 5 Tốt và nhiều chương trình khác. Những trải nghiệm này giúp mình rèn luyện khả năng dẫn dắt, phối hợp tập thể và đưa kế hoạch thành hoạt động thực tế.</p></article>
+      <div class="soft-skills" aria-label="Kỹ năng mềm">
+        <article><span class="skill-number">01</span><h3>Lãnh đạo & làm việc nhóm</h3><p>Kết nối thành viên, phân công công việc và phối hợp để hướng đến mục tiêu chung.</p></article>
+        <article><span class="skill-number">02</span><h3>Lập kế hoạch & tổ chức</h3><p>Xây dựng chương trình, sắp xếp nguồn lực và theo dõi tiến độ hoạt động.</p></article>
+        <article><span class="skill-number">03</span><h3>Giao tiếp & kết nối</h3><p>Trao đổi với sinh viên, phối hợp các bên và truyền đạt thông tin rõ ràng.</p></article>
+        <article><span class="skill-number">04</span><h3>Giải quyết vấn đề</h3><p>Linh hoạt xử lý tình huống, quản lý thời gian và giữ tinh thần trách nhiệm.</p></article>
+      </div>
+      <div class="subsection-heading"><h3>Những hoạt động mình đã tổ chức</h3><p class="muted">Mỗi chương trình là một cơ hội để học hỏi và đóng góp.</p></div>
+      <div class="slider-navigation" aria-label="Điều khiển danh sách hoạt động">
+        <button class="arrow-button arrow-prev slider-arrow" data-slider-direction="-1" type="button" aria-label="Xem hoạt động trước" aria-controls="activity-list"></button>
+        <button class="arrow-button arrow-next slider-arrow" data-slider-direction="1" type="button" aria-label="Xem hoạt động tiếp theo" aria-controls="activity-list"></button>
+      </div>
+      <div class="activity-grid card-slider" style="--slider-columns: 2; --slider-gap: 22px" id="activity-list" tabindex="0" role="region" aria-label="Danh sách hoạt động, cuộn ngang để xem thêm">
+        <article class="activity-card surface-card"><figure class="portfolio-photo" data-photo="Lien-chi-Hoi">
+          <img loading="lazy" alt="Ảnh Liên chi hội">
+          <div class="photo-placeholder" hidden><span aria-hidden="true">▧</span><strong>Không gian lưu giữ kỷ niệm</strong><span>Ảnh hoạt động Xuân tình nguyện</span></div>
+        </figure><div class="activity-body"><h3>Liên chi Hội</h3><p>Nơi những con người xa lạ được gắn kết và làm việc chung.</p></div></article>
+        <article class="activity-card surface-card"><figure class="portfolio-photo" data-photo="xuan-tinh-nguyen">
+          <img loading="lazy" alt="Ảnh hoạt động Xuân tình nguyện">
+          <div class="photo-placeholder" hidden><span aria-hidden="true">▧</span><strong>Không gian lưu giữ kỷ niệm</strong><span>Ảnh hoạt động Xuân tình nguyện</span></div>
+        </figure><div class="activity-body"><h3>Xuân tình nguyện</h3><p>Tổ chức hoạt động tình nguyện, kết nối sinh viên với những đóng góp cho cộng đồng.</p></div></article>
+        <article class="activity-card surface-card"><figure class="portfolio-photo" data-photo="greenday">
+          <img hidden loading="lazy" alt="Ảnh hoạt động GreenDay">
+          <div class="photo-placeholder"><span aria-hidden="true">▧</span><strong>Không gian lưu giữ kỷ niệm</strong><span>Ảnh hoạt động GreenDay</span></div>
+        </figure><div class="activity-body"><h3>GreenDay</h3><p>Tạo ra hoạt động hướng đến môi trường và lan tỏa tinh thần sống xanh.</p></div></article>
+        <article class="activity-card surface-card"><figure class="portfolio-photo" data-photo="sinh-vien-5-tot">
+          <img hidden loading="lazy" alt="Ảnh hoạt động Lễ tuyên dương Sinh viên 5 Tốt">
+          <div class="photo-placeholder"><span aria-hidden="true">▧</span><strong>Không gian lưu giữ kỷ niệm</strong><span>Ảnh hoạt động Lễ tuyên dương Sinh viên 5 Tốt</span></div>
+        </figure><div class="activity-body"><h3>Lễ tuyên dương Sinh viên 5 Tốt</h3><p>Tổ chức chương trình ghi nhận nỗ lực và lan tỏa những tấm gương sinh viên tiêu biểu.</p></div></article>
+      </div>
+      <p class="community-note">Và nhiều hoạt động khác trong công tác Hội và phong trào sinh viên — những trải nghiệm giúp mình trưởng thành cả trong cách làm việc lẫn cách kết nối với mọi người.</p>
+    </section>
+    <section id="achievements" class="section">
+      <div class="section-heading"><div><p class="eyebrow">04 — DẤU MỐC ĐÁNG NHỚ</p><h2>Ghi nhận trên hành trình</h2></div><p class="muted">Những thành tích từ quá trình<br>rèn luyện và đóng góp.</p></div>
+      <div class="slider-navigation" aria-label="Điều khiển danh sách thành tích">
+        <button class="arrow-button arrow-prev slider-arrow" data-slider-direction="-1" type="button" aria-label="Xem thành tích trước" aria-controls="achievement-list"></button>
+        <button class="arrow-button arrow-next slider-arrow" data-slider-direction="1" type="button" aria-label="Xem thành tích tiếp theo" aria-controls="achievement-list"></button>
+      </div>
+      <div class="achievement-grid card-slider" style="--slider-gap: 22px" id="achievement-list" tabindex="0" role="region" aria-label="Danh sách thành tích, cuộn ngang để xem thêm">
+        <article class="achievement-card surface-card"><figure class="portfolio-photo" data-photo="thanh-nien-tien-tien">
+          <img hidden loading="lazy" alt="Ảnh giấy chứng nhận: Thanh niên tiên tiến làm theo lời Bác">
+          <div class="photo-placeholder"><span aria-hidden="true">▧</span><strong>Không gian lưu giữ kỷ niệm</strong><span>Ảnh giấy chứng nhận: Thanh niên tiên tiến làm theo lời Bác</span></div>
+        </figure><div class="activity-body"><p class="award-kind">Giấy chứng nhận</p><h3>Thanh niên tiên tiến làm theo lời Bác</h3><p>Ghi nhận tinh thần rèn luyện, cống hiến và làm theo lời Bác.</p></div></article>
+        <article class="achievement-card surface-card"><figure class="portfolio-photo" data-photo="bang-khen-xuan-tinh-nguyen">
+          <img hidden loading="lazy" alt="Ảnh bằng khen: Thành tích xuất sắc trong chiến dịch Xuân tình nguyện">
+          <div class="photo-placeholder"><span aria-hidden="true">▧</span><strong>Không gian lưu giữ kỷ niệm</strong><span>Ảnh bằng khen: Thành tích xuất sắc trong chiến dịch Xuân tình nguyện</span></div>
+        </figure><div class="activity-body"><p class="award-kind">Bằng khen · Hội Sinh viên Thành phố</p><h3>Thành tích xuất sắc trong chiến dịch Xuân tình nguyện</h3><p>Ghi nhận những đóng góp trong chiến dịch Xuân tình nguyện.</p></div></article>
+        <article class="achievement-card surface-card"><figure class="portfolio-photo" data-photo="giay-khen-hoi-sinh-vien">
+          <img hidden loading="lazy" alt="Ảnh giấy khen: Hoàn thành xuất sắc nhiệm vụ">
+          <div class="photo-placeholder"><span aria-hidden="true">▧</span><strong>Không gian lưu giữ kỷ niệm</strong><span>Ảnh giấy khen: Hoàn thành xuất sắc nhiệm vụ</span></div>
+        </figure><div class="activity-body"><p class="award-kind">Giấy khen · Hội Sinh viên Trường Đại học Khoa học tự nhiên, ĐHQG-HCM</p><h3>Hoàn thành xuất sắc nhiệm vụ</h3><p>Ghi nhận quá trình thực hiện nhiệm vụ trong công tác Hội và phong trào sinh viên.</p></div></article>
+      </div>
+    </section>
+    <section id="contact" class="section contact-section"><div><p class="eyebrow">05 — BẮT ĐẦU MỘT CUỘC TRÒ CHUYỆN</p><h2>Có một ý tưởng?<br><em>Cùng trao đổi nhé.</em></h2><p class="muted">Kết nối để chia sẻ về lập trình, dữ liệu hoặc một dự án thú vị.</p><div class="contact-links"><a href="https://github.com/FireHaru" target="_blank" rel="noopener noreferrer">GitHub ↗</a><a href="https://www.linkedin.com/in/%C4%91%C4%83ng-nguy%E1%BB%85n-6239a1160/" target="_blank" rel="noopener noreferrer">LinkedIn ↗</a></div></div><form class="surface-card" id="contact-form" action="https://formsubmit.co/nguyennhatdang89@gmail.com" method="POST">
+<input type="hidden" name="_subject" value="Lời nhắn mới từ portfolio Nhật Đăng">
+<input type="hidden" name="_template" value="table"><h3>Gửi lời nhắn</h3><div class="field-row"><div class="field"><label for="name">Tên của bạn</label><input id="name" name="name" autocomplete="name" maxlength="100" required placeholder="Họ và tên"></div><div class="field"><label for="email">Email</label><input id="email" type="email" name="email" autocomplete="email" maxlength="200" required placeholder="name@example.com"></div></div><div class="field"><label for="msg">Lời nhắn</label><textarea id="msg" name="msg" rows="4" minlength="10" maxlength="3000" required placeholder="Mình muốn trao đổi về…"></textarea><span id="message-count" class="form-note">0 / 3000</span></div><div class="actions"><button class="button" type="submit">Gửi lời nhắn ↗</button></div><p id="form-status" role="status" aria-live="polite" class="form-note"></p></form></section>
+  </main>
+  <footer class="container"><a class="logo" href="#about">Đ.</a><p>© <span id="year">2026</span> Nguyễn Nhật Đăng</p></footer>
+  <button id="back-to-top" class="icon-button back-to-top" type="button" aria-label="Về đầu trang" hidden>↑</button>
+  <dialog id="project-dialog"><div class="dialog-heading"><p class="eyebrow">CHI TIẾT DỰ ÁN</p><button id="close-dialog" class="icon-button" type="button" aria-label="Đóng chi tiết">×</button></div><h2 id="dialog-title"></h2><p id="dialog-description"></p><h3>Công nghệ</h3><ul id="dialog-tags" class="tags"></ul><p class="form-note">Mô tả được tóm tắt từ tên và công nghệ trong danh mục. Mã nguồn từng dự án chưa được gắn liên kết riêng.</p><a class="button" href="https://github.com/FireHaru" target="_blank" rel="noopener noreferrer">Xem hồ sơ GitHub ↗</a></dialog>
+  <script type="module" src="./app.js"></script>
 </body>
-
 </html>
