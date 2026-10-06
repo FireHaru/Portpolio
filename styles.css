@@ -1040,3 +1040,23 @@ dialog .button {
 .card-slider > * { min-width: 0; scroll-snap-align: start; }
 @media (max-width: 950px) { .card-slider { grid-auto-columns: calc((100% - var(--slider-gap)) / 2); } }
 @media (max-width: 680px) { .card-slider { grid-auto-columns: var(--slider-mobile-width); } }
+
+/* Mũi tên select được căn giữa độc lập với giao diện của trình duyệt. */
+.select-control { position: relative; display: inline-flex; color: var(--text); }
+.select-control select { appearance: none; -webkit-appearance: none; padding: 10px 36px 10px 14px; line-height: 1.5; }
+.select-control::after {
+  content: '';
+  position: absolute;
+  right: 14px;
+  top: calc(50% - 2px);
+  width: 7px;
+  height: 7px;
+  border-right: 1.5px solid currentColor;
+  border-bottom: 1.5px solid currentColor;
+  transform: translateY(-50%) rotate(45deg);
+  pointer-events: none;
+}
+@media (forced-colors: active) {
+  .select-control select { appearance: auto; }
+  .select-control::after { display: none; }
+}
