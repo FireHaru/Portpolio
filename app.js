@@ -2,6 +2,22 @@ import { projects } from './data.js';
 import { portfolioPhotos } from './photos.js';
 import { initPhotoGalleries } from './gallery.js';
 import { initCardSliders } from './slider.js';
+import { loadRepos } from './repo.js';  
+
+const state = document.querySelector('#repos-state');
+const list = document.querySelector('#repo-list');
+
+function repoCard(r){
+  const li = document.createElement('li');
+  const a = document.createElement('a');
+  a.href = r.url;
+  a.textContent = r.name;
+  const p = document.createElement('p');
+  p.textContent = `★ ${r.stars} · ${r.desc}`;
+  li.append(a, p);
+  return li;
+}
+
 const $ = (selector) => document.querySelector(selector);
 const storage = {
   get(key) { try { return localStorage.getItem(key); } catch { return null; } },
@@ -121,3 +137,21 @@ if ('IntersectionObserver' in window) { const observer = new IntersectionObserve
 initPhotoGalleries(portfolioPhotos);
 
 initCardSliders();
+
+async function showRepos(user) {
+  state.textContent = 'Đang tải…';
+  list.textContent = '';
+  try {
+    const repos = await loadRepos(user);
+    state.textContent = repos.length ? ''
+      : 'Chưa có repo công khai.';
+    repos.forEach((r) => list.append(repoCard(r)));
+  } catch (err) {
+    state.textContent = 'Không tải được: ' + err.message;
+    const again = document.createElement('button');
+    again.textContent = 'Thử lại';
+    again.onclick = () => showRepos(user);
+    state.append(again);
+  }
+}
+showRepos('FireHaru');
